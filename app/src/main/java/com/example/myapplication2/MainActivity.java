@@ -20,9 +20,9 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<TypeBook> typeBookList = new ArrayList<>();
+    public ArrayList<TypeBook> typeBookList = new ArrayList<>();
 
-    ListView typelist;
+    public ListView typelist;
 
 
     @Override
@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TypeAdapter typeAdapter = new TypeAdapter(this);
+
+        typelist = (ListView) findViewById(R.id.typelist);
+
+        typelist.setAdapter(typeAdapter);
+
 
 
 //        this.typelist = typelist; //odebranie listy wydarzeń z asyncTask
