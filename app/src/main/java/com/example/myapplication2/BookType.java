@@ -1,12 +1,16 @@
 package com.example.myapplication2;
 
-public class TypeBook {
+public class BookType {
 
     private Integer id;
 
     private String name;
 
-    public TypeBook(Integer id, String name) {
+    public BookType(String name) {
+        this.name = name;
+    }
+
+    public BookType(Integer id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -2,37 +2,46 @@ package com.example.myapplication2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListAdapter;
+import android.util.Log;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    public ArrayList<TypeBook> typeBookList = new ArrayList<>();
+    public ArrayList<BookType> bookTypeList ;
 
     public ListView typelist;
+
+    private Cursor cursor;
+
+    private DbManager dbManager;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        System.out.println("1");
 
-        TypeAdapter typeAdapter = new TypeAdapter(this);
+        dbManager = new DbManager(this);
+
+        bookTypeList = getBookTypeData();
+
+        if(bookTypeList.size() == 0){
+            GenerateDefaultData();
+        }
+
+
+//        for(BookType b : bookTypeList){
+//            Log.d("jest elementów" + bookTypeList.size(), "blablabla");
+//        }
+
+        TypeAdapter typeAdapter = new TypeAdapter(this, bookTypeList, dbManager);
 
         typelist = (ListView) findViewById(R.id.typelist);
 
@@ -51,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //                return view;
 //            }
-//        };
+//        };a
 //        typelist.setAdapter(adapter);
 
 //        Bundle bundle = getIntent().getExtras();
@@ -69,5 +78,29 @@ public class MainActivity extends AppCompatActivity {
 //            }
 
 
+    }
+
+    private void GenerateDefaultData() {
+        System.out.println("2");
+        dbManager.addBookType(new BookType("Thriller2"));
+        dbManager.addBookType(new BookType("Romance2"));
+        dbManager.addBookType(new BookType("Fantasy"));
+    }
+
+
+    private ArrayList<BookType> getBookTypeData(){
+        Cursor data = dbManager.getBookTypes();
+        ArrayList<BookType> listData = new ArrayList<>();
+        BookType bookType;
+
+        while(data.moveToNext()){
+            //get the value from the database in column 1
+            //then add it to the ArrayList
+            int id = data.getInt(0);
+            String name=data.getString(1);
+            bookType =  new BookType(id,name);
+            listData.add(bookType);
+        }
+        return listData;
     }
 }
