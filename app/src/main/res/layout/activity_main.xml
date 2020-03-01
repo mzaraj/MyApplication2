@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="609dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="15dp"
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="78dp">
 

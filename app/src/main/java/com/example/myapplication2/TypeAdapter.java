@@ -73,13 +73,15 @@ public class TypeAdapter extends BaseAdapter {
         });
         type.setText(temp.getName());
 
-        deleteTypeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                dbManager.deleteBookType(numerID.getId());
-//                System.out.println(numerID.getId());
-            }
-        });
+//        deleteTypeButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                dbManager.deleteBookType(numerID.getId());
+//
+////                this.notifyDataSetChanged();
+////                System.out.println(numerID.getId());
+//            }
+//        });
 
 
         return row;

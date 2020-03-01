@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     public ArrayList<BookType> bookTypeList ;
 
@@ -19,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
     private DbManager dbManager;
 
+    Button deleteBookTypeButton;
+
+
+
+//    public TypeAdapter typeAdapter;
+
 
 
 
@@ -27,10 +36,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         System.out.println("1");
+        findViewByIdes();
 
         dbManager = new DbManager(this);
 
         bookTypeList = getBookTypeData();
+
+        System.out.println("mamy tyle elemntów " + bookTypeList.size());
+
 
         if(bookTypeList.size() == 0){
             GenerateDefaultData();
@@ -80,8 +93,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        bookTypeList.clear();
+//        bookTypeList = getBookTypeData(); //reload the items from database
+//        TypeAdapter typeAdapter = new TypeAdapter(this,bookTypeList,dbManager);
+//        typeAdapter.notifyDataSetChanged();
+//    }
+
     private void GenerateDefaultData() {
-        System.out.println("2");
         dbManager.addBookType(new BookType("Thriller2"));
         dbManager.addBookType(new BookType("Romance2"));
         dbManager.addBookType(new BookType("Fantasy"));
@@ -102,5 +123,21 @@ public class MainActivity extends AppCompatActivity {
             listData.add(bookType);
         }
         return listData;
+    }
+
+    void findViewByIdes(){
+        deleteBookTypeButton = (Button) findViewById(R.id.delete_type_button);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final BookType numerID = bookTypeList.get(position);
+
+        deleteBookTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbManager.deleteBookType(numerID.getId());
+            }
+        });
     }
 }

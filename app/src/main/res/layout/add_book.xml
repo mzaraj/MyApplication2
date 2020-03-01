@@ -29,10 +29,13 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="377dp"
+        android:layout_height="555dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="58dp"
         tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="78dp">
-    </ListView>
+        tools:layout_editor_absoluteY="78dp"></ListView>
 
 </RelativeLayout>
