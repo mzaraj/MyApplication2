@@ -65,12 +65,12 @@ public class TypeAdapter extends BaseAdapter {
          BookType temp = bookTypeList.get(position);
          final BookType numerID = bookTypeList.get(position);
 
-        editTypeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                System.out.println("to jest przycisk edit!!!!!!!!!!1");
-            }
-        });
+//        editTypeButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println("to jest przycisk edit!!!!!!!!!!1");
+//            }
+//        });
         type.setText(temp.getName());
 
 //        deleteTypeButton.setOnClickListener(new View.OnClickListener(){

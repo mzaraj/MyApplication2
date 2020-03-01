@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     Button deleteBookTypeButton;
 
+    Button editTypeButton;
+
+    TypeAdapter typeAdapter;
+
 
 
 //    public TypeAdapter typeAdapter;
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //            Log.d("jest elementów" + bookTypeList.size(), "blablabla");
 //        }
 
-        TypeAdapter typeAdapter = new TypeAdapter(this, bookTypeList, dbManager);
+         typeAdapter = new TypeAdapter(this, bookTypeList, dbManager);
 
         typelist = (ListView) findViewById(R.id.typelist);
 
@@ -127,16 +131,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     void findViewByIdes(){
         deleteBookTypeButton = (Button) findViewById(R.id.delete_type_button);
+        editTypeButton = (Button) findViewById(R.id.edit_type_button);
+
     }
+
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final BookType numerID = bookTypeList.get(position);
 
+        System.out.println("pozycja to " + position);
         deleteBookTypeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dbManager.deleteBookType(numerID.getId());
+                 typeAdapter.notifyDataSetChanged();
+            }
+        });
+
+        editTypeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                System.out.println("to jest przycisk edit!!!!!!!!!!1");
             }
         });
     }
